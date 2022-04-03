@@ -15,7 +15,8 @@ services:
     working_dir: /app
     volumes:
       - ./.env:/app/.env
-      - ./requirements.txt:/app/requirements.txt
+      - ./credentials.json:/app/credentials.json
+      - ./id_rsa:/app/id_rsa
       - ./db.sqlite:/app/db.sqlite
     networks:
       - dev
