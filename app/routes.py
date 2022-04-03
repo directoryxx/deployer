@@ -9,7 +9,7 @@ from config import Config
 from services.google import Google
 from services.ssh import SSH
 
-# app.wsgi_app = Middleware(app.wsgi_app)
+app.wsgi_app = Middleware(app.wsgi_app)
 
 # endpoint to CREATE instruction
 @app.route("/instruction", methods=["POST"])
