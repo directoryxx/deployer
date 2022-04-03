@@ -110,9 +110,9 @@ def execute_deploy():
             'data': result
         }
         return make_response(jsonify(data))
-    except:
+    except Exception as e:
         data = {
-            'message': 'Error!',
+            'message': str(e),
             'status': 500,
         }
         return make_response(jsonify(data),500)
