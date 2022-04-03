@@ -1,0 +1,28 @@
+version: "3"
+services:
+  app_deployer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_deployer
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5000:5000"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /app
+    volumes:
+      - ./:/app
+    networks:
+      - dev
+
+
+networks:
+  dev:
+    external: true
+
+# volumes:
+#   mysql:
+#     driver: local
