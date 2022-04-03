@@ -16,6 +16,7 @@ services:
     volumes:
       - ./.env:/app/.env
       - ./requirements.txt:/app/requirements.txt
+      - ./db.sqlite:/app/db.sqlite
     networks:
       - dev
 
