@@ -1,8 +1,10 @@
 from os import environ, path,getcwd
+from dotenv import load_dotenv
+
 
 BASE_DIR = path.abspath(path.dirname(__file__))
 
-
+load_dotenv()
 
 # config class
 class Config(object):
