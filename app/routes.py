@@ -74,7 +74,7 @@ def get_instruction():
 
 @app.route("/deploy", methods=["POST"])
 def execute_deploy():
-    # try:
+    try:
         tag = request.json['tag']
 
         google = Google()
@@ -110,9 +110,9 @@ def execute_deploy():
             'data': result
         }
         return make_response(jsonify(data))
-    # except:
-    #     data = {
-    #         'message': 'Error!',
-    #         'status': 500,
-    #     }
-    #     return make_response(jsonify(data),500)
+    except:
+        data = {
+            'message': 'Error!',
+            'status': 500,
+        }
+        return make_response(jsonify(data),500)

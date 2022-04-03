@@ -13,6 +13,7 @@ class Config(object):
     SECRET_KEY = environ.get('SECRET_KEY')
     HOST = environ.get('HOST')
     PORT = environ.get('PORT')
+    APP_ENV = environ.get('APP_ENV')
 
     # Google
     PROJECT = environ.get('PROJECT')

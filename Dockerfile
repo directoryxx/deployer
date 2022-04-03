@@ -14,5 +14,6 @@ RUN pip install -r requirements.txt
 
 ENV PATH="/home/dev/.local/bin:${PATH}"
 
+ENTRYPOINT [ "python" ]
 
-CMD [ "/bin/sh" ]
+CMD [ "app.py" ]
