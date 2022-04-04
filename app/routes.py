@@ -40,9 +40,9 @@ def create_instruction():
             'data': result
         }
         return make_response(jsonify(data))
-    except:
+    except Exception as e:
         data = {
-            'message': 'Error!',
+            'message': str(e),
             'status': 500,
         }
         return make_response(jsonify(data),500)
@@ -97,7 +97,8 @@ def execute_deploy():
             for data in result:
                 slack.send_message(Config.RAIN,data['short_desc']+"("+str(counter)+"/"+str(len(target))+")",tag)
                 external = SSH()
-                external.connect(data['user'], ip, data['command'])
+                data = external.connect(data['user'], ip, data['command'])
+                slack.send_message(Config.SUNNY,str(data),tag)
 
         slack.send_message(Config.SUNNY,"Deployed Complete",tag)
 
