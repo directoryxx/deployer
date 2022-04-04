@@ -2,7 +2,7 @@ from app import app, db
 
 from app.models import Instruction, WhiteList
 from app.schema import instruction_schema,instruction_schemas
-from flask import request, jsonify, make_response
+from flask import request, jsonify, make_response, abort
 from middleware import Middleware
 from services.slack import Slack
 from config import Config
@@ -82,14 +82,17 @@ def execute_deploy():
         slack = Slack()
         slack.send_message(Config.RAIN,"Getting Information",tag)
 
-        target = google.get_instance_ip(tag)
-
-        slack.send_message(Config.SUNNY,"Get "+str(len(target))+" IPs",tag)
-
         slack.send_message(Config.RAIN,"Starting Deploy",tag)
 
         getInstruction = Instruction.query.filter_by(tag=tag).all()
+        getInstructionFirst = Instruction.query.filter_by(tag=tag).first()
+        if getInstructionFirst is None:
+            abort(404)
+        # print(
         result = instruction_schemas.dump(getInstruction)
+        target = google.get_instance_ip(getInstructionFirst.target)
+
+        slack.send_message(Config.SUNNY,"Get "+str(len(target))+" IPs",tag)
         counter = 0
 
         for ip in target:
