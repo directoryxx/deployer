@@ -103,6 +103,7 @@ def execute_deploy():
                 ssh = paramiko.SSHClient()
                 external = SSH(ssh)
                 data = external.connect(data['user'], ip, data['command'])
+                print(data)
                 ssh.close()
                 slack.send_message(Config.SUNNY,str(data),tag)
 
