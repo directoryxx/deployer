@@ -15,8 +15,8 @@ def create_tables():
 if __name__ == '__main__':
     app.secret_key=Config.SECRET_KEY
     
-    # if Config.APP_ENV == "production":
-    serve(app, host="0.0.0.0", port='5000')
-    # else:
-    # app.run(host='0.0.0.0', port=Config.PORT, debug=Config.DEBUG)
+    if Config.APP_ENV == "production":
+        serve(app, host="0.0.0.0", port=Config.PORT)
+    else:
+        app.run(host='0.0.0.0', port=Config.PORT, debug=Config.DEBUG)
 

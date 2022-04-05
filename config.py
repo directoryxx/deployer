@@ -16,6 +16,7 @@ class Config(object):
     HOST = environ.get('HOST')
     PORT = environ.get('PORT')
     APP_ENV = environ.get('APP_ENV')
+    environ['FLASK_ENV'] = APP_ENV
 
     # Google
     PROJECT = environ.get('PROJECT')

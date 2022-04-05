@@ -18,6 +18,8 @@ services:
       - ./credentials.json:/app/credentials.json
       - ./id_rsa:/app/id_rsa
       - ./db.sqlite:/app/db.sqlite
+      # For development purposes
+      # - ./:/app
     networks:
       - dev
 

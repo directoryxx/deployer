@@ -88,7 +88,7 @@ def execute_deploy():
         getInstructionFirst = Instruction.query.filter_by(tag=tag).first()
         if getInstructionFirst is None:
             abort(404)
-        # print(
+
         result = instruction_schemas.dump(getInstruction)
         target = google.get_instance_ip(getInstructionFirst.target)
 
@@ -120,3 +120,4 @@ def execute_deploy():
             'status': 500,
         }
         return make_response(jsonify(data),500)
+

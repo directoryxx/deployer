@@ -9,4 +9,6 @@ class SSH:
         connect = ssh.connect(ip, username=Config.ROOTUSER,pkey=paramiko.RSAKey.from_private_key_file(Config.SSH_KEY))
         stdin, stdout, stderr = ssh.exec_command('sudo -u '+user+' sh -c "'+command+'"')
         ssh.close()
+        print(stderr)
+        print(stdout)
         return stderr.readlines()
