@@ -8,6 +8,7 @@ from services.slack import Slack
 from config import Config
 from services.google import Google
 from services.ssh import SSH
+import paramiko
 
 # app.wsgi_app = Middleware(app.wsgi_app)
 
@@ -99,8 +100,10 @@ def execute_deploy():
             counter += 1
             for data in result:
                 slack.send_message(Config.RAIN,data['short_desc']+"("+str(counter)+"/"+str(len(target))+")",tag)
-                external = SSH()
+                ssh = paramiko.SSHClient()
+                external = SSH(ssh)
                 data = external.connect(data['user'], ip, data['command'])
+                ssh.close()
                 slack.send_message(Config.SUNNY,str(data),tag)
 
         slack.send_message(Config.SUNNY,"Deployed Complete",tag)
